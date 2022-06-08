@@ -46,7 +46,6 @@
             </div>
             <div class="sidebar"></div>
         </div>
-        <div class="sidebar-container" id="sidebar-container"></div>
     </div>
 
     <div class="editor-container" id="revision-viewer-container">
@@ -98,7 +97,11 @@
 			},
 			removePlugins: [
 				// Perhaps it requires additional modification of the layout.
-				'Pagination'
+				'Pagination',
+                // These plugins requires the `cloudServices` configuration.
+				'RealTimeCollaborativeComments', 'Comments',
+				'RealTimeCollaborativeRevisionHistory', 'RevisionHistory',
+				'RealTimeCollaborativeTrackChanges', 'TrackChanges'
 			]
 		} )
 		.then( editor => {
@@ -106,6 +109,11 @@
 			if ( editor instanceof CKEDITOR.DecoupledEditor ) {
 				const toolbarContainer = document.querySelector( '.editor-toolbar' );
 				toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+			}
+
+			if ( !editor.plugins.has( 'WebSocketGateway' ) ) {
+				document.querySelector( '.sidebar' ).remove();
+				document.querySelector( '#editor' ).style.width = '100%';
 			}
 
 			window.editor = editor;
