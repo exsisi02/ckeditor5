@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 – all-in build – development sample</title>
+    <style>
+        body {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .editor-element {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .main {
+            width: 75%;
+        }
+
+        .sidebar {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CKEditor 5 – all-in build – development sample</h1>
+
+
+<div class="editors-holder">
+    <div class="editor-toolbar"></div>
+
+    <div class="editor-container" id="editor-container">
+        <div class="editor-element">
+            <div class="main" id="editor">
+                <h2>Sample</h2>
+
+                <p>This is an instance of the <a href="https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/alternative-setups/predefined-builds.html#classic-editor">classic editor build</a>.</p>
+
+                <figure class="image">
+                    <img src="../tests/manual/sample.jpg" alt="Autumn fields" />
+                </figure>
+
+                <p>You can use this sample to validate whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/alternative-setups/custom-builds.html">custom build</a> works fine.</p>
+            </div>
+            <div class="sidebar"></div>
+        </div>
+        <div class="sidebar-container" id="sidebar-container"></div>
+    </div>
+
+    <div class="editor-container" id="revision-viewer-container">
+        <div class="editor-element">
+            <div id="revision-viewer-editor"></div>
+        </div>
+        <div class="sidebar-container" id="revision-viewer-sidebar"></div>
+    </div>
+</div>
+
+<script src="../build/ckeditor.js"></script>
+<script>
+	CKEDITOR.DecoupledEditor.create( document.querySelector( '#editor' ), {
+			revisionHistory: {
+				showRevisionViewerCallback: config => {
+					const editorContainer = document.querySelector( '#editor-container' );
+					const viewerContainer = document.querySelector( '#revision-viewer-container' );
+					const viewerElement = document.querySelector( '#revision-viewer-editor' );
+
+					config.revisionHistory.viewerSidebarContainer = document.querySelector( '#revision-viewer-sidebar' );
+
+					return CKEDITOR.DecoupledEditor.create( viewerElement, config ).then( viewerEditor => {
+						viewerContainer.style.display = 'flex';
+						editorContainer.style.display = 'none';
+
+						const toolbarContainer = document.querySelector( '.editor-toolbar' );
+						toolbarContainer.innerHTML = '';
+						toolbarContainer.appendChild( viewerEditor.ui.view.toolbar.element );
+
+						return viewerEditor;
+					} );
+				},
+				closeRevisionViewerCallback: viewerEditor => {
+					const editorContainer = document.querySelector( '#editor-container' );
+					const viewerContainer = document.querySelector( '#revision-viewer-container' );
+
+					viewerContainer.style.display = 'none';
+					editorContainer.style.display = '';
+
+					return viewerEditor.destroy().then( () => {
+						const toolbarContainer = document.querySelector( '.editor-toolbar' );
+						toolbarContainer.innerHTML = '';
+						toolbarContainer.appendChild( window.editor.ui.view.toolbar.element );
+					} );
+				}
+			},
+			sidebar: {
+				container: document.querySelector( '.sidebar' )
+			},
+			removePlugins: [
+				// Perhaps it requires additional modification of the layout.
+				'Pagination'
+			]
+		} )
+		.then( editor => {
+			// Adds the toolbar when rendering the Document editor.
+			if ( editor instanceof CKEDITOR.DecoupledEditor ) {
+				const toolbarContainer = document.querySelector( '.editor-toolbar' );
+				toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+			}
+
+			window.editor = editor;
+		} )
+		.catch( error => {
+			console.error( 'There was a problem initializing the editor.', error );
+		} );
+</script>
+
+</body>
+</html>
