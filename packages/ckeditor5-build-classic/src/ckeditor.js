@@ -4,8 +4,7 @@
  */
 
 // The editor creator to use.
-import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage';
@@ -14,8 +13,7 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import CKFinder from '@ckeditor/ckeditor5-ckfinder/src/ckfinder';
 import CKFinderUploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
-import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
+import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
 import DataFilter from '@ckeditor/ckeditor5-html-support/src/datafilter';
 import DataSchema from '@ckeditor/ckeditor5-html-support/src/dataschema';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
@@ -77,10 +75,10 @@ import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 
-export default class ClassicEditor extends ClassicEditorBase {}
+class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
-ClassicEditor.builtinPlugins = [
+Editor.builtinPlugins = [
 	Alignment,
 	Autoformat,
 	AutoImage,
@@ -89,8 +87,7 @@ ClassicEditor.builtinPlugins = [
 	Bold,
 	CKFinder,
 	CKFinderUploadAdapter,
-	Code,
-	CodeBlock,
+	CloudServices,
 	DataFilter,
 	DataSchema,
 	Essentials,
@@ -154,7 +151,7 @@ ClassicEditor.builtinPlugins = [
 ];
 
 // Editor configuration.
-ClassicEditor.defaultConfig = {
+Editor.defaultConfig = {
 	toolbar: {
 		items: [
 			'heading',
@@ -174,10 +171,8 @@ ClassicEditor.defaultConfig = {
 			'superscript',
 			'|',
 			'link',
-			'codeBlock',
 			'blockQuote',
 			'sourceEditing',
-			'code',
 			'findAndReplace',
 			'|',
 			'bulletedList',
@@ -202,14 +197,14 @@ ClassicEditor.defaultConfig = {
 			'pageBreak'
 		]
 	},
+	language: 'en',
 	image: {
 		toolbar: [
+			'imageTextAlternative',
 			'imageStyle:inline',
 			'imageStyle:block',
 			'imageStyle:side',
-			'|',
-			'toggleImageCaption',
-			'imageTextAlternative'
+			'linkImage'
 		]
 	},
 	table: {
@@ -220,7 +215,7 @@ ClassicEditor.defaultConfig = {
 			'tableCellProperties',
 			'tableProperties'
 		]
-	},
-	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	}
 };
+
+export default Editor;

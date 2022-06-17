@@ -33,8 +33,8 @@
     "@ckeditor/ckeditor5-block-quote": "^34.1.0",
     "@ckeditor/ckeditor5-ckfinder": "^34.1.0",
     "@ckeditor/ckeditor5-cloud-services": "^34.1.0",
-    "@ckeditor/ckeditor5-code-block": "^34.1.0",
-    "@ckeditor/ckeditor5-easy-image": "^34.1.0",
+    "@ckeditor/ckeditor5-dev-utils": "^30.1.5",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^30.1.5",
     "@ckeditor/ckeditor5-editor-classic": "^34.1.0",
     "@ckeditor/ckeditor5-essentials": "^34.1.0",
     "@ckeditor/ckeditor5-find-and-replace": "^34.1.0",
@@ -60,7 +60,9 @@
     "@ckeditor/ckeditor5-source-editing": "^34.1.0",
     "@ckeditor/ckeditor5-special-characters": "^34.1.0",
     "@ckeditor/ckeditor5-table": "^34.1.0",
+    "@ckeditor/ckeditor5-theme-lark": "^34.1.0",
     "@ckeditor/ckeditor5-typing": "^34.1.0",
+    "@ckeditor/ckeditor5-watchdog": "^34.1.0",
     "@ckeditor/ckeditor5-word-count": "^34.1.0"
   },
   "devDependencies": {
