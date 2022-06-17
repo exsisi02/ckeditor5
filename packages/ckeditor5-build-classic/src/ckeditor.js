@@ -4,7 +4,7 @@
  */
 
 // The editor creator to use.
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage';
@@ -42,7 +42,6 @@ import Link from '@ckeditor/ckeditor5-link/src/link';
 import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
-import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import MediaEmbedToolbar from '@ckeditor/ckeditor5-media-embed/src/mediaembedtoolbar';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention';
@@ -75,10 +74,10 @@ import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount';
 
-class Editor extends ClassicEditor {}
+export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
-Editor.builtinPlugins = [
+ClassicEditor.builtinPlugins = [
 	Alignment,
 	Autoformat,
 	AutoImage,
@@ -116,7 +115,6 @@ Editor.builtinPlugins = [
 	LinkImage,
 	List,
 	ListProperties,
-	Markdown,
 	MediaEmbed,
 	MediaEmbedToolbar,
 	Mention,
@@ -151,7 +149,7 @@ Editor.builtinPlugins = [
 ];
 
 // Editor configuration.
-Editor.defaultConfig = {
+ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
 			'heading',
@@ -217,5 +215,3 @@ Editor.defaultConfig = {
 		]
 	}
 };
-
-export default Editor;
